@@ -1,4 +1,4 @@
-## Timber 101
+## Android Logging - Timber 101
 
 #### Wait, what is Timber?
 [Timber](https://github.com/JakeWharton/timber) is an open source logging library from [Jake Wharton](https://github.com/JakeWharton) at [Square](http://square.github.io/)(the company behind dagger, retrofit, picasso, and many more) that turns Log into a meaningful and useful debugging tool, even after app release. Instead of calling `Log.e(tag, message)`, you would call `Timber.e(message)`. When you initialize Timber, you decide what to do with errors. If you simply want to wrap Log, you can use the built-in `Timber.DebugTree`, which calls Log and automagically uses the calling class name as the tag. `Timber.v` calls `Log.v`. `Timber.d` calls `Log.d`. Etcetera. 
