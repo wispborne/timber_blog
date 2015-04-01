@@ -1,8 +1,8 @@
 ## Android Logging - Timber 101
 
 #### Wait, what is Timber?
-[Timber](https://github.com/JakeWharton/timber) is an open source logging library from [Jake Wharton](https://github.com/JakeWharton) at [Square](http://square.github.io/) (the company behind dagger, retrofit, picasso, and many more) that turns Log into a meaningful and useful debugging tool, even after app release. Instead of calling `Log.e(tag, message)`, you would call `Timber.e(message)`. When you initialize Timber, you decide what to do with errors. If you simply want to wrap Log, you can use the built-in `Timber.DebugTree`, which calls Log and automagically uses the calling class name as the tag. `Timber.v` calls `Log.v`. `Timber.d` calls `Log.d`. Etcetera. 
-When you want to get fancy, and where Timber gets cool, is when you start making your own Trees (Tree? Timber? Logging? this is humor at it's finest).
+[Timber](https://github.com/JakeWharton/timber) is an open source logging library from [Jake Wharton](https://github.com/JakeWharton) at [Square](http://square.github.io/) (the company behind dagger, retrofit, picasso, and many more) that turns logging into a meaningful and useful debugging tool, even after app release. All calls to `Log.v/d/i/w/e(tag, message)` are replaced by `Timber.v/d/i/w/e(message)` or `Timber.v/d/i/w/e(exception, message)` is used. When you initialize Timber, you decide what to do with logs. If you simply want to wrap Log, you can use the built-in `Timber.DebugTree`, which calls Log and automagically uses the calling class name as the tag. `Timber.v` calls `Log.v`. `Timber.d` calls `Log.d`. Etcetera. 
+When you want to get fancy, and where Timber gets cool, is when you start making your own Trees (Trees? Timber? Logging? this is humor at it's finest).
 
 #### Getting fancy
 Do you leave your Log.v and Log.d calls in your app when you release it because you can't be bothered check for the build type whenever you write a log statement? I understand, but you're still a bad person. 
@@ -84,3 +84,12 @@ try {
     // Close input stream
 }
 ```
+
+#### One more thing
+Of course, Trees can be swapped at runtime. Enabling full logging is as simple as calling 
+```java 
+Timber.uprootAll(); // Removes all trees from Timber
+Timber.plant(new ReleaseLoggingTree());
+Timber.plant(new Timber.DebugTree());
+```
+Throw a checkbox onto the preferences screen to enable full logging, add a button to email logs to the dev, and you have yourself an easy way for the user to send the logcat for hard-to-reproduce bugs. 
