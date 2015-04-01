@@ -63,4 +63,24 @@ public class CrashlyticsLoggingTree implements Timber.Tree {
 }
 ```
 
-`Timber.v`, `Timber.d`, and `Timber.i` are all completely ignored. `Timber.w` logs only to logcat (opional), and `Timber.e` will actually send logged non-fatal errors to your Crashlytics dashboard in additional to logging to logcat.
+`Timber.v`, `Timber.d`, and `Timber.i` are all completely ignored. `Timber.w` logs only to logcat (opional), and `Timber.e` will actually send logged non-fatal errors to your Crashlytics dashboard in addition to logging to logcat.
+
+#### Usage
+Now that everything it in place, we have meaningful and useful logging levels to use throughout our app - `Timber.v` means verbose. `Timber.e` had better be important, because you'll be getting emails from Crashlytics about it.
+
+```java
+try {
+    // Log in user
+    Timber.v("User logged in, username=%s, url=%s, length=%d", username, url, response.length());
+} catch (UnauthorizedException e) {
+    throw new AuthenticationException("Authorization failure for " + username, e);
+} catch (UnknownHostException e) {
+    Timber.d(e, e.getMessage());
+    throw e;
+} catch (IOException e) {
+    Timber.e(e, e.getMessage() + ", username=%s, url=%s", username, url);
+    throw e;
+} finally {
+    // Close input stream
+}
+```
