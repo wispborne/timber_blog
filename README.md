@@ -5,7 +5,7 @@
 When you want to get fancy, and where Timber gets cool, is when you start making your own Trees (Trees? Timber? Logging? this is humor at it's finest).
 
 #### Getting fancy
-Do you leave your Log.v and Log.d calls in your app when you release it because you can't be bothered check for the build type whenever you write a log statement? I understand, but you're still a bad person. 
+Do you leave your Log.v and Log.d calls in your app when you release it because you can't be bothered to check for the build type whenever you write a log statement? I understand, but you're still a bad person. 
 
 Enter Timber. Check this out:
 ```java
